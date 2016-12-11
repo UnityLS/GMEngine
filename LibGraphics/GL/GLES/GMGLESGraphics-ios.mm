@@ -6,40 +6,34 @@ namespace game
 {
 	GraphicsEngine* GraphicsEngine::create(GraphicsEngine::Parameters& param)
 	{
-		GraphicsEngine* ret = new (std::nothrow)GLESGraphics(param);
-		if (ret && ret->initialize())
+		GraphicsEngine* ret = new (std::nothrow)GLGraphics(param);
+		if (ret)
 			return ret;
 		GM_SAFE_DELETE(ret);
 		return ret;
 	}
-
-	GLESGraphics::GLESGraphics(GraphicsEngine::Parameters& param) :
-		GLGraphics(param),
-        mContext(nullptr)
-	{
-	}
-
-	GLESGraphics::~GLESGraphics()
-	{
-	}
-
-	bool GLESGraphics::initialize()
-	{
-        mContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-        
-		setViewport(0, 0, mViewWidth, mViewHeight);
-		setDepthRange(0.0f, mClearDepth);
-
-		// Enable point size by default.
-		//glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
-
-		return true;
-	}
-
-	void GLESGraphics::terminate()
-	{
-
-	}
 }
+
+static id g_Instance;
+
+@implementation GLESGraphics
+
+@synthesize context;
+
++(id) getInstance
+{
+    if (g_Instance == nil)
+    {
+        g_Instance = [GLESGraphics new];
+    }
+    return g_Instance;
+}
+
+-(void) terminate
+{
+    
+}
+
+@end
 
 #endif // defined(GM_USE_OPENGLES) && (GM_TARGET_PLATFORM == GM_PLATFORM_IOS)

@@ -14,6 +14,11 @@
 #import <OpenGL/glext.h>
 #endif // GM_TARGET_PLATFORM == GM_PLATFORM_MAC
 
+#if GM_TARGET_PLATFORM == GM_PLATFORM_IOS
+#import <OpenGLES/ES1/gl.h>
+#import <OpenGLES/ES1/glext.h>
+#endif // GM_TARGET_PLATFORM == GM_PLATFORM_IOS
+
 namespace game
 {
 	class GM_DLL GLGraphics : public GraphicsEngine

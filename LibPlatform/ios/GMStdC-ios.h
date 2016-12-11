@@ -14,14 +14,15 @@ typedef std::wstring WString;
 
 #define GM_DLL
 
-#define GM_GL_DEPTH24_STENCIL8      -1
+#define glClearDepth                glClearDepthf
+#define glDepthRange                glDepthRangef
+#define glDeleteVertexArrays        glDeleteVertexArraysOES
+#define glGenVertexArrays           glGenVertexArraysOES
+#define glBindVertexArray           glBindVertexArrayOES
+#define glMapBuffer                 glMapBufferOES
+#define glUnmapBuffer               glUnmapBufferOES
 
-#define glDeleteVertexArrays            glDeleteVertexArraysAPPLE
-#define glGenVertexArrays               glGenVertexArraysAPPLE
-#define glBindVertexArray               glBindVertexArrayAPPLE
-#define glClearDepthf                   glClearDepth
-#define glDepthRangef                   glDepthRange
-#define glReleaseShaderCompiler(xxx)
-
+#define GL_DEPTH24_STENCIL8         GL_DEPTH24_STENCIL8_OES
+#define GL_WRITE_ONLY               GL_WRITE_ONLY_OES
 
 #endif // GM_TARGET_PLATFORM == GM_PLATFORM_IOS

@@ -39,7 +39,7 @@ namespace game
 			return false;
 		}
 
-#if (GM_TARGET_PLATFORM != GM_PLATFORM_MAC)
+#if (GM_TARGET_PLATFORM != GM_PLATFORM_MAC) & (GM_TARGET_PLATFORM != GM_PLATFORM_IOS)
 		GLenum GlewInitResult = glewInit();
 		if (GLEW_OK != GlewInitResult)
 		{
@@ -68,8 +68,10 @@ namespace game
 		setViewport(0, 0, mViewWidth, mViewHeight);
 		setDepthRange(0.0f, mClearDepth);
 
+#if (GM_TARGET_PLATFORM != GM_PLATFORM_IOS)
 		// Enable point size by default.
 		glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
+#endif // (GM_TARGET_PLATFORM == GM_PLATFORM_IOS)
 
 		return true;
 	}
@@ -99,13 +101,22 @@ namespace game
 
 	void GLGraphics::setDepthRange(float zMin, float zMax)
 	{
+#if (GM_TARGET_PLATFORM != GM_PLATFORM_IOS)
 		glDepthRange((GLclampd)zMin, (GLclampd)zMax);
+#else
+        glDepthRange((GLclampf)zMin, (GLclampf)zMax);
+#endif // (GM_TARGET_PLATFORM != GM_PLATFORM_IOS)
 	}
 
 	void GLGraphics::getDepthRange(float& zMin, float& zMax) const
 	{
+#if (GM_TARGET_PLATFORM != GM_PLATFORM_IOS)
 		GLclampd param[2];
 		glGetDoublev(GL_DEPTH_RANGE, param);
+#else
+        GLclampf param[2];
+        glGetFloatv(GL_DEPTH_RANGE, param);
+#endif // (GM_TARGET_PLATFORM != GM_PLATFORM_IOS)
 
 		zMin = (float)param[0];
 		zMax = (float)param[1];

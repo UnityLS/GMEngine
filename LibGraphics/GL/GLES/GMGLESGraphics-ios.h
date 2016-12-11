@@ -4,22 +4,19 @@
 
 #if defined(GM_USE_OPENGLES) && (GM_TARGET_PLATFORM == GM_PLATFORM_IOS)
 
-namespace game
-{
-	class GM_DLL GLESGraphics : public GLGraphics
-    {
-	public:
-		GLESGraphics(GraphicsEngine::Parameters& param);
-		virtual ~GLESGraphics();
+#import <Foundation/Foundation.h>
+#import <OpenGLES/EAGL.h>
+#import <OpenGLES/ES3/gl.h>
+#import <OpenGLES/ES3/glext.h>
 
-		virtual bool initialize() override;
-		virtual void terminate() override;
-        
-        inline EAGLContext * getEAGLContext() const { return mContext; }
-        
-    protected:
-        EAGLContext * mContext;
-	};
+@interface GLESGraphics : NSObject {
+    game::GLGraphics* mGLGraphics;
+    EAGLContext* mContext;
 }
+@property (readwrite) EAGLContext* context;
++(id) getInstance;
+-(void) terminate;
+
+@end
 
 #endif // defined(GM_USE_OPENGLES) && (GM_TARGET_PLATFORM == GM_PLATFORM_IOS)

@@ -6,7 +6,6 @@
 #include "GL/GMGLGraphics.h"
 #elif defined(GM_USE_OPENGLES)
 #include "GL/GLES/GMGLESGraphics.h"
-#include "GL/GLES/GMGLESGraphics-ios.h"
 #else
 
 #endif

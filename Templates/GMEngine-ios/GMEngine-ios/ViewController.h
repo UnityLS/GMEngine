@@ -11,11 +11,13 @@
 
 @interface ViewController : GLKViewController
 {
-    EAGLContext *context;
-    GLKView     *glView;
+    unsigned int colorRenderBuffer;
+    unsigned int defaultFrameBuffer;
+    unsigned int msaaFrameBuffer;
+    unsigned int msaaColorBuffer;
 }
 
-@property (strong, nonatomic) EAGLContext *context;
-@property (strong, nonatomic) GLKView *glView;
+- (void) swapBuffers;
+
 @end
 
